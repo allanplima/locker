@@ -8,7 +8,7 @@ Para iniciar o App, pelo terminar, entrar na pasta /app
 
 depois
 
-`npm run serve``
+`npm run serve`
 
 
 ## Server
