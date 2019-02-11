@@ -1,0 +1,13 @@
+@font-face {
+    font-family: "Graphik";
+    font-weight: 400;
+    src: url('../fonts/graphik/Graphik-400-Regular.otf'),
+         /* url('./assets/fonts/graphik/Graphik-400-Regular.ttf')  format('truetype') Safari, Android, iOS */
+  }
+
+@font-face {
+    font-family: "Graphik";
+    font-weight: 400;
+    src: url('../fonts/graphik/Graphik-600-Semibold.otf'),
+         /* url('./assets/fonts/graphik/Graphik-400-Regular.ttf')  format('truetype') Safari, Android, iOS */
+  }

@@ -1,0 +1,14 @@
+type Access {
+    id: ID! @unique #@id
+    userAssigned: User! @relation(name: "AccessToUser")
+    roles: [String!]!
+}
+
+# type Role {
+    # operations: [Operation]
+# }
+
+# type Operation @embedded {
+    # resource: String!
+    # action: String!
+# }

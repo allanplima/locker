@@ -1,0 +1,176 @@
+# roles {
+#     master {
+#         ADMIN
+#         USER
+#         MYSELF
+#         subRoles {
+#             PHYSICIAN
+#             MANAGER
+#             TECHNICIAN
+#             TECHNOLOGY
+#             TYPIST
+#             BASIC
+#         }
+
+#     }
+# }
+
+scalar Upload
+
+type Query {
+    users(query: String): [User!]!
+    userInfo: User!
+    sessions: [Session!]!
+    roles(id: String): User!
+    logs(query: String): [Log!]!
+    isThisSessionValid: isThisSessionValidPayload!
+}
+
+# MUTATIONS
+
+type Mutation {
+    createUser(data: CreateUserInput!): AuthPayload! 
+    loginUser(email: String!, password: String!): AuthPayload 
+    deleteUser(id: ID!): User! 
+    updateUser(id: ID!, data: UpdateUserInput!): User!
+    resetPassword(email: String): ResetPasswordPayload!
+    confirmEmail(token: String): User!
+    sendConfirmationEmailEmail(token: String, email: String): ConfirmationPayload!
+    logoutUser(sessionId: String): logoutUserPayload!
+    setNewPasswordAtReset(password: String!): setNewPasswordAtResetType!
+}
+
+input CreateUserInput {
+  enabled: Boolean! 
+  hidden: Boolean! 
+  password: String!
+  emailVerified: Boolean! 
+  firstName: String!
+  lastName: String! 
+  email: String! 
+  profilePicture: Upload
+  birthday: String
+  crm: String
+  eCrm: String
+  signaturePath: String
+}
+
+input UserIDInput {
+    id: String
+}
+
+type ResetPasswordPayload {
+    redirect: String!
+}
+
+input UpdateUserInput {
+  enabled: Boolean 
+  hidden: Boolean
+  totp: Boolean
+  emailVerified: Boolean
+  password: String
+  firstName: String
+  lastName: String
+  email: String
+  profilePicture: Upload!
+  birthday: String
+  crm: String
+  eCrm: String
+  signaturePath: String
+}
+
+type AuthPayload {
+    user: User!
+    token: String!
+}
+
+type ConfirmationPayload {
+    emailSent: Boolean!
+}
+
+input LoginUserInput {
+    email: String!
+    username: String
+    password: String!
+}
+
+type logoutUserPayload {
+    loggedOut: Boolean!
+    redirect: String!
+}
+
+type isThisSessionValidPayload {
+    valid: Boolean!
+}
+
+type setNewPasswordAtResetType {
+    passwordUpdated: Boolean!
+}
+
+# TYPES 
+
+type User {
+  id: ID!
+  enabled: Boolean!
+  hidden: Boolean! 
+  totp: Boolean 
+  password: String
+  emailVerified: Boolean! 
+  firstName: String!
+  lastName: String! 
+  email: String
+  profilePicture: String
+  birthday: String # utilizar ISO 8601 
+  # environments: [{ type: String ref: Environment }]
+  expertises: [String!]
+  # permissions: [{
+  #   eviromentID: String
+  #   permissionID: String
+  # }]
+  crm: String
+  eCrm: String
+  signaturePath: String
+  # defaultPhrases: [{
+  #   name: { type: String required: true }
+  #   content: { type: String required: true }
+  #   created_at: { type: Date! default: new Date() }
+  # }]
+  defaultReports: [String!]
+  # configurations: {
+  #   defaultViewer: String
+  #   environment: {}
+  # }
+  # queue: [{ type: String ref: Exam }]
+  requiredActions: [String!]
+  # scope: {
+  #   manageGroupMembership: Boolean
+  #   view: Boolean
+  #   mapRoles: Boolean
+  #   impersonate: Boolean
+  #   manage: Boolean
+  # }
+  #   settings: Settings
+  sessions: [Session!]!
+  logs: [Log!]! 
+  createdAt: String! 
+  updatedAt: String! 
+}
+
+type Session {
+    id: ID!
+    operatingSystemName: String
+    operatingSystemVersion: String
+    browserName: String
+    browserVersion: String
+    fingerprint: String # Aqui deve ir o path do fingerprint para análise posterior
+    createdAt: String!
+    user: User! # demonstra um link bidirecional entre duas entidades
+}
+
+type Log {
+    id: ID! 
+    operation: String!
+    resource: String!
+    doneAt: String!
+    user: User
+}

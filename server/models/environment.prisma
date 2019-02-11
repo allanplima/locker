@@ -1,0 +1,87 @@
+type Hospital {
+    id: ID! @id
+    name: String! @required @unique
+    path: String
+    createdAt: DateTime! @createdAt
+    updatedAt: DateTime! @updatedAt
+    profile: HospitalProfile!
+    # configurations: HospitalConfigurations!
+    enabled: Boolean! @required @default(value: true)
+    admin: User! @relation(name: "AdminOfHospital")
+}
+
+type HospitalProfile @embedded {
+    billing: User! @relation(name: "BillingUser")
+    CNPJ: String
+    CPF: String
+    name: String
+    # templates: [ReportTemplate!],
+    address: String
+    ZIPcode: String
+    phone: String
+    # teams: [{ type: mongoose.Schema.Types.ObjectId, ref: Teams }]
+}
+
+# type HospitalConfigurations @embedded {
+#     AETITLE: String @unique
+#     IPAdress: String
+# }
+
+# type ReportTemplate {
+#     id: ID! @id
+#     ownership: Hospital!
+#     createdAt: DateTime! @createdAt
+#     updatedAt: DateTime! @updatedAt
+#     meta: MetaData!,
+#     access: {
+#     # teams: [{ type: mongoose.Schema.ObjectId, ref: Teams }],
+#         users: [User!]!
+#     },
+#     sheet: PaperSheetOptions,
+#     sections: [ReportSheetSection!]
+# }
+
+# type MetaData @embedded {
+#     name: String! @required
+#     userID: User!
+#     environments: [Hospital!]!
+#     createdAt: DateTime! @createdAt
+#     updatedAt: DateTime! @updatedAt,
+#     modality: String! @required
+#     enabled: Boolean @default(value: true)
+# }
+
+# type PaperSheetOptions {
+#     margins: PaperSheetOptionsMargins,
+#     font: PaperSheetOptionsFonts
+# }
+
+# type PaperSheetOptionsMargins @embedded {
+#     top: Int! @default(value: 0)
+#     right: Int! @default(value: 0)
+#     bottom: Int! @default(value: 0)
+#     left: Int! @default(value: 0)
+# }
+
+# type PaperSheetOptionsFonts @embedded {
+#     size: String!
+#     family: String!
+# }
+
+# type ReportSheetSection @embedded{
+#     id: String!
+#     image: String!
+#     name: String!
+#     signature: Boolean!
+#     rects: ReportSheetSectionRect
+#     position: ReportSheetSectionPosition
+# }
+
+# type ReportSheetSectionRect @embedded {
+#     height: Int!
+# }
+
+# type ReportSheetSectionPosition @embedded {
+#     vertical: Int!
+#     horizontal: Int!
+# }

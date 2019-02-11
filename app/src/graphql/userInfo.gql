@@ -1,0 +1,23 @@
+query {
+    userInfo {
+        id
+        firstName
+        lastName
+        enabled
+        hidden
+        totp
+        password
+        emailVerified
+        email
+        profilePicture
+        birthday
+        expertises
+        crm
+        eCrm
+        signaturePath
+        defaultReports
+        requiredActions
+        createdAt
+        updatedAt
+    }
+}

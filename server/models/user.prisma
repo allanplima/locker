@@ -1,0 +1,52 @@
+type User {
+  id: ID! @unique #@id
+  enabled: Boolean! @default(value: "true")
+  hidden: Boolean! @default(value: "false")
+  totp: Boolean
+  emailVerified: Boolean! @default(value: "false")
+  password: String!
+  firstName: String! #@required
+  lastName: String! #@required
+  email: String! @unique
+  profilePicture: String
+  birthday: DateTime # utilizar ISO 8601 
+  # hospitals: [Hospital!]! @relation(name: "hospitalWorker")
+  expertises: [String!]
+  access: [Access!]! @relation(name: "AccessToUser", onDelete: CASCADE)
+  crm: String
+  eCrm: String
+  signaturePath: String
+  # defaultPhrases: [{
+  #   name: { type: String required: true }
+  #   content: { type: String required: true }
+  #   created_at: { type: DateTime! default: new Date() }
+  # }]
+  defaultReports: [String!]
+  # configurations: {
+  #   defaultViewer: String
+  #   environment: {}
+  # }
+  # queue: [{ type: String ref: Exam }]
+  requiredActions: [String!]
+  # scope: {
+  #   manageGroupMembership: Boolean
+  #   view: Boolean
+  #   mapRoles: Boolean
+  #   impersonate: Boolean
+  #   manage: Boolean
+  # }
+  settings: Settings
+  sessions: [Session!]! @relation(name: "UserToSession", onDelete: CASCADE)
+  logs: [Log!]!
+  createdAt: DateTime! #@createdAt
+  updatedAt: DateTime! #@updatedAt
+}
+
+type Settings {
+  theme: ThemePicker @default(value: "LIGHT")
+}
+
+enum ThemePicker {
+  DARK,
+  LIGHT
+}

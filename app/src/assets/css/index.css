@@ -1,0 +1,62 @@
+@import './fonts.css';
+@import './flex.css';
+
+:root {
+    --info-color: #2986E2;
+    --error-color: #ef758f;
+    --neutral-color: #ddd;
+    --font-base: rgb(80,80,80);
+}
+
+body * {
+    box-sizing: border-box
+}
+
+a {
+    text-decoration: none;
+    color: var(--info-color)
+}
+
+button {
+    padding: 10px 15px;
+    font-family: "Graphik";
+    border: none;
+    border-radius: 3px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.text-center {
+    text-align: center;
+}
+
+ul, 
+ol,
+li {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.container {
+    max-width: 80%;
+    width: 75%;
+    margin: 0 auto;
+}
+
+.lead {
+    font-size: 1.2em;
+}
+
+p.small {
+    font-size: 0.887em;
+}
+
+hr {
+    border-top: 1px solid rgb(220,220,220) ;
+    border-bottom: 0px;
+    border-left: 0px;
+    border-right: 0px;    
+}

@@ -1,0 +1,65 @@
+# exclamação quer dizer "não nulo / not null"
+type User {
+    id: ID!
+    email: String!
+    username: String
+    password: String!
+    createdAt: Date!
+    updatedAt: Date!
+    profilePicture: String
+    birthday: Date
+    sessions: [Session!]!
+    environments: [Environment]
+    reports: [Report]
+    logs: [Log!]!
+    access: [Access!]!
+}
+
+type Session {
+    id: ID!
+    operatingSystemName: String
+    operatingSystemVersion: String
+    browserName: String
+    browserVersion: String
+    fingerprint: String # Aqui deve ir o path do fingerprint para análise posterior
+    createdAt: Date!
+    updatedAt: Date!
+    user: ID! @relation(type: ID_LINK, with_type: User) # demonstra um link bidirecional entre duas entidades
+}
+
+type Log {
+    id: ID!
+    operation: String!
+    resource: String!
+    doneAt: String!
+    user: ID! @relation(type: ID_LINK, with_type: User)
+}
+
+type Access {
+    id: ID!
+    environment: String! @relation(link: ID_LINK, with_type: Environment)
+    user: String!
+    permissions: [Permission!]!
+    createdAt: Datetime
+    updatedAt: Datetime
+}
+
+type Permission {
+    operation: [String!]!
+    resource: String # Resource pode ser o nome da tela ou função que o cliente tenta utilizar
+}
+
+type Environment {
+    id: ID!
+    name: String
+    createdAt: Date!
+    updatedAt: Date!
+    teams: [EnvironmentTeams!]!,
+    billing: String! # id da empresa na IUGU para consulta
+    AETITLE: String!
+    CNPJ: String!
+    mainIpAdress: String!
+    enabled: Boolean,
+    templates: [EnvironmentReportTemplate!]!
+    employees: [User]
+}

@@ -1,0 +1,10 @@
+query {
+    sessions {
+        id
+        browserName
+        operatingSystemName
+        browserVersion
+        operatingSystemVersion
+        createdAt
+    }
+}

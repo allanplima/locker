@@ -1,0 +1,7 @@
+type Log {
+    id: ID! @unique #@id
+    operation: String!
+    resource: String!
+    createdAt: DateTime! #@createdAt
+    user: User!
+}

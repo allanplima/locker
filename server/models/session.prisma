@@ -1,0 +1,11 @@
+type Session {
+    id: ID! @unique
+    operatingSystemName: String
+    operatingSystemVersion: String
+    browserName: String
+    browserVersion: String
+    fingerprint: String # Aqui deve ir o path do fingerprint para análise posterior
+    createdAt: DateTime! # @createdAt
+    updatedAt: DateTime! # @updatedAt
+    user: User @relation(name: "UserToSession", link: INLINE)# demonstra um link bidirecional entre duas entidades
+}
