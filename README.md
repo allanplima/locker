@@ -4,7 +4,7 @@ Ele também contém um plugin, ainda não terminado, de gerenciamento de autenti
 
 Para iniciar o App, pelo terminar, entrar na pasta /app
 
-`npm install``
+`npm install`
 
 depois
 
