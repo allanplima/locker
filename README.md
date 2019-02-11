@@ -23,3 +23,10 @@ O servidor foi implementado em GraphQL e já tem
 - Máquina docker pronta para deploy
 
 Para entender como o servidor funciona e como deve ser startado, visitar https://www.prisma.io/docs
+
+##### ATENÇÃO
+O arquivo .env contém as keys ( que não podem subir por motivos de segurança ) que devem ser utilizadas no servidor. Isso inclui
+
+- Key de bloqueio servidor para ORM
+- Key de cryptografia do Token Bearer
+- Keys do IAM da AWS
